@@ -10,13 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AffirmationsRouteImport } from './routes/affirmations'
+import { Route as CoachRouteImport } from './routes/coach'
 import { Route as GoalsRouteImport } from './routes/goals'
 import { Route as HabitsRouteImport } from './routes/habits'
+import { Route as ReflectionRouteImport } from './routes/reflection'
 import { Route as RemindersRouteImport } from './routes/reminders'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AffirmationsRoute = AffirmationsRouteImport.update({
+  id: '/affirmations',
+  path: '/affirmations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachRoute = CoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GoalsRoute = GoalsRouteImport.update({
@@ -29,6 +42,11 @@ const HabitsRoute = HabitsRouteImport.update({
   path: '/habits',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReflectionRoute = ReflectionRouteImport.update({
+  id: '/reflection',
+  path: '/reflection',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RemindersRoute = RemindersRouteImport.update({
   id: '/reminders',
   path: '/reminders',
@@ -37,35 +55,69 @@ const RemindersRoute = RemindersRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/affirmations': typeof AffirmationsRoute
+  '/coach': typeof CoachRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
+  '/reflection': typeof ReflectionRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/affirmations': typeof AffirmationsRoute
+  '/coach': typeof CoachRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
+  '/reflection': typeof ReflectionRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/affirmations': typeof AffirmationsRoute
+  '/coach': typeof CoachRoute
   '/goals': typeof GoalsRoute
   '/habits': typeof HabitsRoute
+  '/reflection': typeof ReflectionRoute
   '/reminders': typeof RemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/goals' | '/habits' | '/reminders'
+  fullPaths:
+    | '/'
+    | '/affirmations'
+    | '/coach'
+    | '/goals'
+    | '/habits'
+    | '/reflection'
+    | '/reminders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/goals' | '/habits' | '/reminders'
-  id: '__root__' | '/' | '/goals' | '/habits' | '/reminders'
+  to:
+    | '/'
+    | '/affirmations'
+    | '/coach'
+    | '/goals'
+    | '/habits'
+    | '/reflection'
+    | '/reminders'
+  id:
+    | '__root__'
+    | '/'
+    | '/affirmations'
+    | '/coach'
+    | '/goals'
+    | '/habits'
+    | '/reflection'
+    | '/reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AffirmationsRoute: typeof AffirmationsRoute
+  CoachRoute: typeof CoachRoute
   GoalsRoute: typeof GoalsRoute
   HabitsRoute: typeof HabitsRoute
+  ReflectionRoute: typeof ReflectionRoute
   RemindersRoute: typeof RemindersRoute
 }
 
@@ -76,6 +128,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/affirmations': {
+      id: '/affirmations'
+      path: '/affirmations'
+      fullPath: '/affirmations'
+      preLoaderRoute: typeof AffirmationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach': {
+      id: '/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof CoachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/goals': {
@@ -92,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HabitsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reflection': {
+      id: '/reflection'
+      path: '/reflection'
+      fullPath: '/reflection'
+      preLoaderRoute: typeof ReflectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reminders': {
       id: '/reminders'
       path: '/reminders'
@@ -104,8 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AffirmationsRoute: AffirmationsRoute,
+  CoachRoute: CoachRoute,
   GoalsRoute: GoalsRoute,
   HabitsRoute: HabitsRoute,
+  ReflectionRoute: ReflectionRoute,
   RemindersRoute: RemindersRoute,
 }
 export const routeTree = rootRouteImport
